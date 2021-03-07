@@ -4,7 +4,6 @@ import { Text, WEB_VIEW_NAME, WEB_VIEW_TITLE } from "./consts";
 
 export const onActivate = () => {
   const documentSourceCode = vscode.window.activeTextEditor?.document.getText();
-
   const svgTree = parse(documentSourceCode!) ?? null;
 
   if (!svgTree) {
@@ -21,13 +20,13 @@ export const onActivate = () => {
 };
 
 const openWebview = () => {
-  const panel = vscode.window.createWebviewPanel(
+  const view = vscode.window.createWebviewPanel(
     WEB_VIEW_NAME,
     WEB_VIEW_TITLE,
     vscode.ViewColumn.One
   );
 
-  return panel;
+  return view;
 };
 
 const isASpriteSVG = (svgTree: RootNode) => {
