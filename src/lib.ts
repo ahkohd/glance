@@ -5,7 +5,7 @@ import { Text, WEB_VIEW_NAME, WEB_VIEW_TITLE } from "./consts";
 export const onActivate = () => {
   const documentSourceCode = vscode.window.activeTextEditor?.document.getText();
 
-  const svgTree = parseSVG(documentSourceCode ?? "");
+  const svgTree = parse(documentSourceCode!) ?? null;
 
   if (!svgTree) {
     vscode.window.showErrorMessage(Text.unableToParseSvgDocument);
@@ -18,14 +18,6 @@ export const onActivate = () => {
     preview.webview.html = getWebviewContent(documentSourceCode ?? "");
   } else {
     vscode.window.showErrorMessage(Text.notASpriteSvgDocument);
-  }
-};
-
-const parseSVG = (svg: string) => {
-  try {
-    return parse(svg);
-  } catch (e) {
-    return null;
   }
 };
 
