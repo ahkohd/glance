@@ -13,15 +13,14 @@ export const onActivate = () => {
   }
 
   if (isASpriteSVG(svgTree)) {
-    const preview = openPreview();
-
-    preview.webview.html = getWebviewContent(documentSourceCode ?? "");
+    const viewer = openWebview();
+    viewer.webview.html = getWebviewContent(documentSourceCode ?? "");
   } else {
     vscode.window.showErrorMessage(Text.notASpriteSvgDocument);
   }
 };
 
-const openPreview = () => {
+const openWebview = () => {
   const panel = vscode.window.createWebviewPanel(
     WEB_VIEW_NAME,
     WEB_VIEW_TITLE,
