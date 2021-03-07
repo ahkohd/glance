@@ -1,8 +1,9 @@
 import * as vscode from "vscode";
 import { parse, RootNode, ElementNode } from "svg-parser";
 import { Text, WEB_VIEW_NAME, WEB_VIEW_TITLE } from "./consts";
+import { join } from "path";
 
-export const onActivate = () => {
+export const onActivate = (context: vscode.ExtensionContext) => {
   const documentSourceCode = vscode.window.activeTextEditor?.document.getText();
   const svgTree = parse(documentSourceCode!) ?? null;
 
@@ -12,18 +13,24 @@ export const onActivate = () => {
   }
 
   if (isASpriteSVG(svgTree)) {
-    const viewer = openWebview();
-    viewer.webview.html = getWebviewContent(documentSourceCode ?? "");
+    const { extensionPath } = context;
+    const viewer = openWebview(extensionPath);
+
+    viewer.webview.html = getWebviewContent(svgTree, extensionPath);
   } else {
     vscode.window.showErrorMessage(Text.notASpriteSvgDocument);
   }
 };
 
-const openWebview = () => {
+const openWebview = (extensionPath: string) => {
   const view = vscode.window.createWebviewPanel(
     WEB_VIEW_NAME,
     WEB_VIEW_TITLE,
-    vscode.ViewColumn.One
+    vscode.ViewColumn.One,
+    {
+      enableScripts: true,
+      localResourceRoots: [vscode.Uri.file(join(extensionPath, "out"))],
+    }
   );
 
   return view;
@@ -40,17 +47,34 @@ const isASpriteSVG = (svgTree: RootNode) => {
   );
 };
 
-const getWebviewContent = (text: string) => {
+const getWebviewContent = (svgTree: RootNode, extensionPath: string) => {
+  const reactAppPathOnDisk = vscode.Uri.file(
+    join(extensionPath, "out", "svgSpriteViewer.js")
+  );
+
+  const reactAppUri = reactAppPathOnDisk.with({ scheme: "vscode-resource" });
+
   return `<!DOCTYPE html>
-      <html lang="en">
-      <head>
-          <meta charset="UTF-8">
-          <meta name="viewport" content="width=device-width, initial-scale=1.0">
-          <title>Cat Coding</title>
-      </head>
-      <body>
-          <img src="https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif" width="300" />
-          ${text}
-      </body>
-      </html>`;
+  <html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Config View</title>
+
+      <meta http-equiv="Content-Security-Policy"
+            content="default-src 'none';
+                    img-src https:;
+                    script-src 'unsafe-eval' 'unsafe-inline' vscode-resource:;
+                    style-src vscode-resource: 'unsafe-inline';">
+
+      <script>
+        window.acquireVsCodeApi = acquireVsCodeApi;
+        window.initialData = ${svgTree};
+      </script>
+  </head>
+  <body>
+      <div id="root"></div>
+      <script src="${reactAppUri}"></script>
+  </body>
+  </html>`;
 };
