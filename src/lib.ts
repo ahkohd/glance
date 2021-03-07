@@ -68,8 +68,7 @@ const getWebviewContent = (svgTree: RootNode, extensionPath: string) => {
                     style-src vscode-resource: 'unsafe-inline';">
 
       <script>
-        window.acquireVsCodeApi = acquireVsCodeApi;
-        window.initialData = ${svgTree};
+        window.initialData = ${JSON.stringify(svgTree)};
       </script>
   </head>
   <body>
