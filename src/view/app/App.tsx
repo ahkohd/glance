@@ -11,6 +11,9 @@ const App = () => {
         <SVGsGrid />
         <ControlPanel />
       </div>
+      <p>
+        Made with 💜 by <a href="https://github.com/ahkohd">@ahkohd</a>
+      </p>
     </div>
   );
 };

@@ -1,8 +1,3 @@
-/* http://meyerweb.com/eric/tools/css/reset/ 
-   v2.0 | 20110126
-   License: none (public domain)
-*/
-
 html,
 body,
 div,
@@ -41,7 +36,6 @@ strong,
 sub,
 sup,
 tt,
-var,
 b,
 u,
 i,
@@ -138,7 +132,7 @@ body {
 }
 
 .input {
-  background: var(--vscod-input-background);
+  background: var(--vscode-input-background);
   color: var(--vscode-input-foreground);
   border: 1px solid var(--vscode-input-border);
   padding: 8px 10px;
@@ -149,7 +143,7 @@ body {
 }
 
 .input--error {
-  background: var(--vscod-input-errorBackground);
+  background: var(--vscode-input-errorBackground);
   color: var(--vscode-input-errorForeground);
   border-color: (--vscode-input-errorBorder);
 
@@ -158,6 +152,81 @@ body {
   }
 }
 
+label {
+  font-weight: bold;
+  display: block;
+}
+
 .input__searchbar {
   width: 100%;
+}
+
+.content {
+  display: grid;
+  width: 100%;
+  grid-template-columns: 1fr 0.3fr;
+  grid-column-gap: 15px;
+  height: 86vh;
+}
+
+.svg_grid {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  grid-column-gap: 20px;
+  grid-row-gap: 20px;
+  overflow: auto;
+
+  .svg_grid__preview {
+    display: flex;
+    place-content: center;
+    place-items: center;
+    flex-direction: column;
+    padding: 30px 0;
+
+    &:hover {
+      color: var(--vscode-input-foreground);
+      cursor: pointer;
+    }
+  }
+
+  .svg_grid__label {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+.config_controls {
+  input {
+    width: 100%;
+  }
+
+  label {
+    margin-bottom: 5px;
+    text-transform: uppercase;
+  }
+
+  li {
+    margin-bottom: 20px;
+
+    &:hover {
+      color: var(--vscode-input-foreground);
+    }
+  }
+}
+
+.text--error {
+  color: var(--vscode-input-foreground);
+}
+
+.mb-20 {
+  margin-bottom: 20px;
+}
+
+.mb-5 {
+  margin-bottom: 5px;
+}
+
+.mt-5 {
+  margin-top: 10px;
 }

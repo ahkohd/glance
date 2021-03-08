@@ -3,8 +3,8 @@ import { ElementNode } from "svg-parser";
 
 interface PreviewConfig {
   color: string;
-  size: number;
-  strokeWidth: number;
+  size: string;
+  strokeWidth: string;
 }
 
 console.log("Jumping ship", (window as any).initialData);
@@ -14,16 +14,14 @@ const Store = createStore({
     svgTree: (window as any)?.initialData?.children[0] as ElementNode,
     config: {
       color: "currentColor",
-      size: 18,
-      strokeWidth: 2,
+      size: "18",
+      strokeWidth: "",
+      stroke: "",
     },
     query: "",
   },
   actions: {
-    configurePreview: (config: Partial<PreviewConfig>) => ({
-      setState,
-      getState,
-    }) => {
+    configure: (config: Partial<PreviewConfig>) => ({ setState, getState }) => {
       setState({
         config: {
           ...getState().config,
