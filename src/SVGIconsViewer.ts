@@ -1,7 +1,7 @@
 import { ExtensionContext, window, Uri } from "vscode";
 import { parse, RootNode } from "svg-parser";
-import { Text } from "./consts";
-import { isASpriteSVG, openWebview } from "./fns";
+import { Text } from "consts/consts";
+import { isASpriteSVG, openWebview } from "utils/fns";
 import { join } from "path";
 
 export default class SVGIconsViewer {

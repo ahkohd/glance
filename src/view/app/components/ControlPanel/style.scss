@@ -1,0 +1,18 @@
+.config_controls {
+    input {
+        width: 100%;
+    }
+
+    label {
+        margin-bottom: 5px;
+        text-transform: uppercase;
+    }
+
+    li {
+        margin-bottom: 20px;
+
+        &:hover {
+            color: var(--vscode-input-foreground);
+        }
+    }
+}

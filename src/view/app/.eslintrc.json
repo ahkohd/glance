@@ -1,7 +1,8 @@
 {
-  "browser": true,
-  "extends": ["eslint:recommended", "plugin:react/recommended"],
-  "rules": {
-    "@typescript-eslint/naming-convention": "off"
-  }
+    "browser": true,
+    "extends": ["eslint:recommended", "plugin:react/recommended"],
+    "rules": {
+        "@typescript-eslint/naming-convention": "off",
+        "semi": "off"
+    }
 }

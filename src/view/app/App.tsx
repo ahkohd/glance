@@ -1,14 +1,14 @@
-import React from "react";
-import Footer from "./components/Footer";
-import Content from "./Content";
+import React from 'react'
+import Footer from 'components/Footer/Footer'
+import Content from 'Content'
 
 const App = () => {
-  return (
-    <div id="App">
-      <Content />
-      <Footer />
-    </div>
-  );
-};
+    return (
+        <div id="App">
+            <Content />
+            <Footer />
+        </div>
+    )
+}
 
-export default App;
+export default App

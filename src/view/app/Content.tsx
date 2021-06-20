@@ -1,18 +1,18 @@
-import React from "react";
-import ControlPanel from "./components/ControlPanel";
-import Searchbar from "./components/Searchbar";
-import SVGsGrid from "./components/SVGsGrid";
+import React from 'react'
+import ControlPanel from 'components/ControlPanel/ControlPanel'
+import Searchbar from 'components/Searchbar/Searchbar'
+import Grid from 'components/Grid/Grid'
 
 const Content = () => {
-  return (
-    <>
-      <Searchbar />
-      <div className="content">
-        <SVGsGrid />
-        <ControlPanel />
-      </div>
-    </>
-  );
-};
+    return (
+        <>
+            <Searchbar />
+            <div className="content">
+                <Grid />
+                <ControlPanel />
+            </div>
+        </>
+    )
+}
 
-export default Content;
+export default Content
