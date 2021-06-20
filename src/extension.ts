@@ -1,10 +1,14 @@
-import * as vscode from "vscode";
-import { onActivate } from "./lib";
+import { ExtensionContext, commands } from "vscode";
+import SVGIconsViewer from "./SVGIconsViewer";
 
-export function activate(context: vscode.ExtensionContext) {
-  let disposable = vscode.commands.registerCommand("svgicon.open", () =>
-    onActivate(context)
+// @TODO: Add action icon to the editor tabs bar, when
+// clicked it will open the SVG sprites view
+
+export function activate(context: ExtensionContext) {
+  let disposable = commands.registerCommand("svgspritesviewer.open", () =>
+    SVGIconsViewer.instance.onActivate(context)
   );
+
   context.subscriptions.push(disposable);
 }
 

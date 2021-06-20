@@ -7,8 +7,6 @@ interface PreviewConfig {
   strokeWidth: string;
 }
 
-console.log("Jumping ship", (window as any).initialData);
-
 const Store = createStore({
   initialState: {
     svgTree: (window as any)?.initialData?.children[0] as ElementNode,
@@ -21,19 +19,23 @@ const Store = createStore({
     query: "",
   },
   actions: {
-    configure: (config: Partial<PreviewConfig>) => ({ setState, getState }) => {
-      setState({
-        config: {
-          ...getState().config,
-          ...config,
-        },
-      });
-    },
-    setQuery: (query: string) => ({ setState }) => {
-      setState({
-        query,
-      });
-    },
+    configure:
+      (config: Partial<PreviewConfig>) =>
+      ({ setState, getState }) => {
+        setState({
+          config: {
+            ...getState().config,
+            ...config,
+          },
+        });
+      },
+    setQuery:
+      (query: string) =>
+      ({ setState }) => {
+        setState({
+          query,
+        });
+      },
   },
 });
 

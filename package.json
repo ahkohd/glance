@@ -1,6 +1,6 @@
 {
-  "name": "svgicon",
-  "displayName": "svgicon",
+  "name": "svgspritesviewer",
+  "displayName": "svgspritesviewer",
   "description": "",
   "version": "0.0.1",
   "engines": {
@@ -16,8 +16,8 @@
   "contributes": {
     "commands": [
       {
-        "command": "svgicon.open",
-        "title": "Open SVG Icons"
+        "command": "svgspritesviewer.open",
+        "title": "View SVG Sprites"
       }
     ]
   },

@@ -51,6 +51,9 @@ const SVGsGrid = () => {
     }
   };
 
+  // @TODO: Refactor
+  // Implement click to copy SVG Id to clipboard
+
   return (
     <>
       {assets.length > 0 ? (
