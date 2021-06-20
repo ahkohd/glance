@@ -3,7 +3,6 @@ body {
     outline: 0;
     padding: 0;
     margin: 0;
-    overflow: hidden;
 }
 
 body {
@@ -13,12 +12,12 @@ body {
     display: flex;
     height: 100vh;
     width: 100vw;
+    overflow: hidden;
 }
 
 #root {
     flex: 1;
     margin: 1vw;
-    border: 1px solid pink;
     display: flex;
 }
 
@@ -36,27 +35,14 @@ body {
             flex: 1;
             display: flex;
 
-            .svg_grid {
-                flex: 1;
-            }
-
             aside {
                 width: 30%;
             }
 
-            @media screen and (max-width: 1000px) {
+            @media screen and (max-width: 1165px) {
                 flex-direction: column-reverse;
                 aside {
                     width: 100%;
-
-                    .config_controls {
-                        display: flex;
-                        justify-content: space-evenly;
-
-                        li {
-                            margin-bottom: 0;
-                        }
-                    }
                 }
             }
         }
@@ -68,9 +54,11 @@ body {
     color: var(--vscode-input-foreground);
     border: 1px solid var(--vscode-input-border);
     padding: 8px 10px !important;
+    font-family: var(--vscode-editor-font-family);
 
     &::placeholder {
         color: var(--vscode-input-placeholderForeground);
+        font-family: var(--vscode-editor-font-family);
     }
 }
 
@@ -91,6 +79,10 @@ label {
 
 .text--error {
     color: var(--vscode-input-foreground);
+}
+
+.text--italics {
+    font-style: italic;
 }
 
 .mb-20 {

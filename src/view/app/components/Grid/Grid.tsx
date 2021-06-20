@@ -58,11 +58,11 @@ const Grid = () => {
     // Implement click to copy SVG Id to clipboard
 
     return (
-        <>
+        <div className="content__content">
             {assets.length > 0 ? (
                 <div className="svg_grid">
                     {assets.map((svg, index) => (
-                        <div key={index} className="svg_grid__preview">
+                        <a href="#" key={index} className="svg_grid__preview">
                             <svg
                                 dangerouslySetInnerHTML={{
                                     __html: svg.svgText,
@@ -76,15 +76,15 @@ const Grid = () => {
                                 strokeWidth={config.strokeWidth}
                             ></svg>
                             <p className="svg_grid__label mt-5">{svg.id}</p>
-                        </div>
+                        </a>
                     ))}
                 </div>
             ) : (
-                <p className="info text--error">
+                <p className="info text--error text--italics">
                     No result found for "{query}", try another keyword 🤷🏽‍♂️
                 </p>
             )}
-        </>
+        </div>
     )
 }
 

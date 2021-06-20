@@ -31,25 +31,29 @@ const ControlPanel = () => {
                 </li>
                 <li>
                     <label>Color</label>
-                    <input
-                        type="color"
-                        className="input"
-                        placeholder={config.color}
-                        value={config.color}
-                        name="color"
-                        onChange={handleChange}
-                    />
+                    <div className="control">
+                        <input
+                            type="color"
+                            className="input"
+                            placeholder={config.color}
+                            value={config.color}
+                            name="color"
+                            onChange={handleChange}
+                        />
+                    </div>
                 </li>
                 <li>
                     <label>Stroke</label>
-                    <input
-                        type="color"
-                        className="input"
-                        placeholder={config.stroke}
-                        value={config.stroke}
-                        name="stroke"
-                        onChange={handleChange}
-                    />
+                    <div className="control">
+                        <input
+                            type="color"
+                            className="input"
+                            placeholder={config.stroke}
+                            value={config.stroke}
+                            name="stroke"
+                            onChange={handleChange}
+                        />
+                    </div>
                 </li>
                 <li>
                     <label className="mb-5">Stroke width</label>

@@ -12,7 +12,7 @@ const Store = createStore({
         svgTree: (window as any)?.initialData?.children[0] as ElementNode,
         config: {
             color: 'currentColor',
-            size: '18',
+            size: '38',
             strokeWidth: '',
             stroke: '',
         },
