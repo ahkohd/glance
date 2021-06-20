@@ -4,8 +4,8 @@ import { Text } from 'consts/consts'
 import { isASpriteSVG, openWebview } from 'utils/fns'
 import { join } from 'path'
 
-export default class SVGIconsViewer {
-    public static instance = new SVGIconsViewer()
+export default class SvgSpritesViewer {
+    public static instance = new SvgSpritesViewer()
 
     public onActivate(context: ExtensionContext): void {
         const documentSourceCode = window.activeTextEditor?.document.getText()
@@ -45,7 +45,6 @@ export default class SVGIconsViewer {
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <title>Config View</title>
-    
             <meta http-equiv="Content-Security-Policy"
                 content="default-src 'none';
                         img-src https:;
