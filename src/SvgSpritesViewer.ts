@@ -1,8 +1,8 @@
+import { join } from 'path'
 import { ExtensionContext, window, Uri } from 'vscode'
 import { parse, RootNode } from 'svg-parser'
-import { Text } from 'consts/consts'
-import { isASpriteSVG, openWebview } from 'utils/fns'
-import { join } from 'path'
+import { Text } from './consts/consts'
+import { isASpriteSVG, openWebview } from './utils/fns'
 
 export default class SvgSpritesViewer {
     public static instance = new SvgSpritesViewer()

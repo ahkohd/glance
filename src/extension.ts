@@ -1,5 +1,5 @@
 import { ExtensionContext, commands } from 'vscode'
-import SvgSpritesViewer from 'SvgSpritesViewer'
+import SvgSpritesViewer from './SvgSpritesViewer'
 
 // @TODO: Add action icon to the editor tabs bar, when
 // clicked it will open the SVG sprites view

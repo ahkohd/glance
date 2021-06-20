@@ -1,3 +1,7 @@
-.input__searchbar {
-  width: 100%;
+.searchbar__container {
+    display: flex;
+
+    .input__searchbar {
+        flex: 1;
+    }
 }

@@ -5,13 +5,13 @@ import Grid from 'components/Grid/Grid'
 
 const Content = () => {
     return (
-        <>
+        <main>
             <Searchbar />
             <div className="content">
                 <Grid />
                 <ControlPanel />
             </div>
-        </>
+        </main>
     )
 }
 

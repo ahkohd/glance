@@ -1,18 +1,22 @@
 {
-  "compilerOptions": {
-    "baseUrl": "./src",
-    "module": "commonjs",
-    "target": "es6",
-    "outDir": "out",
-    "lib": ["es6", "dom"],
-    "sourceMap": true,
-    "rootDir": "src",
-    "strict": true,
-    "jsx": "react",
-    "noUnusedLocals": true,
-    "noImplicitReturns": true,
-    "noFallthroughCasesInSwitch": true,
-    "experimentalDecorators": true
-  },
-  "exclude": ["node_modules", ".vscode-test", "**/view/app/**"]
+    "compilerOptions": {
+        "baseUrl": "./src",
+        "paths": {
+            "*": ["*"]
+        },
+        "module": "commonjs",
+        "target": "es6",
+        "outDir": "out",
+        "lib": ["es6", "dom"],
+        "sourceMap": true,
+        "rootDir": "src",
+        "strict": true,
+        "jsx": "react",
+        "noUnusedLocals": true,
+        "noImplicitReturns": true,
+        "noFallthroughCasesInSwitch": true,
+        "experimentalDecorators": true,
+        "declarationMap": false
+    },
+    "exclude": ["node_modules", ".vscode-test", "**/view/app/**"]
 }

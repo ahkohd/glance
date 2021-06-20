@@ -3,9 +3,9 @@ import './style.scss'
 
 const Footer = (): JSX.Element => {
     return (
-        <p>
+        <footer>
             Made with 💜 by <a href="https://github.com/ahkohd">@ahkohd</a>
-        </p>
+        </footer>
     )
 }
 

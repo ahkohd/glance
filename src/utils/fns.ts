@@ -1,7 +1,7 @@
 import * as vscode from 'vscode'
 import { join } from 'path'
 import { RootNode, ElementNode } from 'svg-parser'
-import { WEB_VIEW_NAME, WEB_VIEW_TITLE } from 'consts/consts'
+import { WEB_VIEW_NAME, WEB_VIEW_TITLE } from '../consts/consts'
 
 export const openWebview = (extensionPath: string) => {
     return vscode.window.createWebviewPanel(

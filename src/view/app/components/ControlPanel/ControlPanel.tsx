@@ -14,7 +14,7 @@ const ControlPanel = () => {
     }
 
     return (
-        <div>
+        <aside>
             <ul className="config_controls">
                 <li>
                     <label>Size</label>
@@ -64,7 +64,7 @@ const ControlPanel = () => {
                     />
                 </li>
             </ul>
-        </div>
+        </aside>
     )
 }
 
