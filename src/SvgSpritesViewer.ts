@@ -49,7 +49,7 @@ export default class SvgSpritesViewer {
                         style-src vscode-resource: 'unsafe-inline';">
     
             <script>
-            window.initialData = ${JSON.stringify(svgTree)};
+                window.initialData = ${JSON.stringify(svgTree)};
             </script>
         </head>
         <body>
