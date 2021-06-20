@@ -13,10 +13,7 @@ export default class SvgSpritesViewer {
 
         if (!svgTree) {
             window.showErrorMessage(Text.unableToParseSvgDocument)
-            return
-        }
-
-        if (isASpriteSVG(svgTree)) {
+        } else if (isASpriteSVG(svgTree)) {
             const { extensionPath } = context
             const viewer = openWebview(extensionPath)
 
