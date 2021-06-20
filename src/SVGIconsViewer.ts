@@ -1,39 +1,44 @@
-import { ExtensionContext, window, Uri } from "vscode";
-import { parse, RootNode } from "svg-parser";
-import { Text } from "consts/consts";
-import { isASpriteSVG, openWebview } from "utils/fns";
-import { join } from "path";
+import { ExtensionContext, window, Uri } from 'vscode'
+import { parse, RootNode } from 'svg-parser'
+import { Text } from 'consts/consts'
+import { isASpriteSVG, openWebview } from 'utils/fns'
+import { join } from 'path'
 
 export default class SVGIconsViewer {
-  public static instance = new SVGIconsViewer();
+    public static instance = new SVGIconsViewer()
 
-  public onActivate(context: ExtensionContext): void {
-    const documentSourceCode = window.activeTextEditor?.document.getText();
-    const svgTree = parse(documentSourceCode!) ?? null;
+    public onActivate(context: ExtensionContext): void {
+        const documentSourceCode = window.activeTextEditor?.document.getText()
+        const svgTree = parse(documentSourceCode!) ?? null
 
-    if (!svgTree) {
-      window.showErrorMessage(Text.unableToParseSvgDocument);
-      return;
+        if (!svgTree) {
+            window.showErrorMessage(Text.unableToParseSvgDocument)
+            return
+        }
+
+        if (isASpriteSVG(svgTree)) {
+            const { extensionPath } = context
+            const viewer = openWebview(extensionPath)
+
+            viewer.webview.html = this.getWebviewContent(svgTree, extensionPath)
+        } else {
+            window.showErrorMessage(Text.notASpriteSvgDocument)
+        }
     }
 
-    if (isASpriteSVG(svgTree)) {
-      const { extensionPath } = context;
-      const viewer = openWebview(extensionPath);
+    private getWebviewContent(
+        svgTree: RootNode,
+        extensionPath: string
+    ): string {
+        const reactAppPathOnDisk = Uri.file(
+            join(extensionPath, 'out', 'svgSpriteViewer.js')
+        )
 
-      viewer.webview.html = this.getWebviewContent(svgTree, extensionPath);
-    } else {
-      window.showErrorMessage(Text.notASpriteSvgDocument);
-    }
-  }
+        const reactAppUri = reactAppPathOnDisk.with({
+            scheme: 'vscode-resource',
+        })
 
-  private getWebviewContent(svgTree: RootNode, extensionPath: string): string {
-    const reactAppPathOnDisk = Uri.file(
-      join(extensionPath, "out", "svgSpriteViewer.js")
-    );
-
-    const reactAppUri = reactAppPathOnDisk.with({ scheme: "vscode-resource" });
-
-    return `<!DOCTYPE html>
+        return `<!DOCTYPE html>
     <html lang="en">
     <head>
         <meta charset="UTF-8">
@@ -54,6 +59,6 @@ export default class SVGIconsViewer {
         <div id="root"></div>
         <script src="${reactAppUri}"></script>
     </body>
-    </html>`;
-  }
+    </html>`
+    }
 }
