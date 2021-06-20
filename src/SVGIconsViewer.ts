@@ -38,27 +38,29 @@ export default class SVGIconsViewer {
             scheme: 'vscode-resource',
         })
 
-        return `<!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Config View</title>
-  
-        <meta http-equiv="Content-Security-Policy"
-              content="default-src 'none';
-                      img-src https:;
-                      script-src 'unsafe-eval' 'unsafe-inline' vscode-resource:;
-                      style-src vscode-resource: 'unsafe-inline';">
-  
-        <script>
-          window.initialData = ${JSON.stringify(svgTree)};
-        </script>
-    </head>
-    <body>
-        <div id="root"></div>
-        <script src="${reactAppUri}"></script>
-    </body>
-    </html>`
+        return `
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Config View</title>
+    
+            <meta http-equiv="Content-Security-Policy"
+                content="default-src 'none';
+                        img-src https:;
+                        script-src 'unsafe-eval' 'unsafe-inline' vscode-resource:;
+                        style-src vscode-resource: 'unsafe-inline';">
+    
+            <script>
+            window.initialData = ${JSON.stringify(svgTree)};
+            </script>
+        </head>
+        <body>
+            <div id="root"></div>
+            <script src="${reactAppUri}"></script>
+        </body>
+        </html>
+    `
     }
 }
