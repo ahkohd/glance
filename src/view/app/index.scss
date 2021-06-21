@@ -1,3 +1,7 @@
+* {
+    box-sizing: border-box;
+}
+
 html,
 body {
     outline: 0;
@@ -9,29 +13,30 @@ body {
     font-size: var(--vscode-editor-font-size);
     font-weight: var(--vscode-editor-font-weight);
     font-family: var(--vscode-editor-font-family);
-    display: flex;
-    height: 100vh;
-    width: 100vw;
+
     overflow: hidden;
 }
 
 #root {
-    flex: 1;
-    margin: 1vw;
-    display: flex;
+    height: 100vh;
+    width: 100vw;
+    padding: 1vw;
 }
 
 #App {
     width: 100%;
-    display: flex;
-    flex-direction: column;
+
+    footer {
+        height: 30px;
+    }
 
     & > main {
-        flex: 1;
+        height: calc(100vh - 60px);
         display: flex;
         flex-direction: column;
 
         .content {
+            height: 80vh;
             flex: 1;
             display: flex;
 
