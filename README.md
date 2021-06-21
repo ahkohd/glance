@@ -1,7 +1,7 @@
 <img src="./media/glance-sm.png" style="height: 100px; display: table; margin: 20px auto;">
 <h1 style="text-align: center; border: none; margin-bottom: 0">Glance</h1>
 
-A VS Code extension for previewing [SVG sprites icons](https://css-tricks.com/svg-symbol-good-choice-icons/) gracefully.
+A `VsCode` extension for previewing [SVG sprites icons](https://css-tricks.com/svg-symbol-good-choice-icons/) gracefully.
 
 ## ✨ Features
 
@@ -11,6 +11,8 @@ A VS Code extension for previewing [SVG sprites icons](https://css-tricks.com/sv
 -   [x] Appearance controls
 
 ![Banner](media/banner.png)
+
+> **Psst!** [Watch video to see glance in action 🔥](https://css-tricks.com/svg-symbol-good-choice-icons/)
 
 ## Extension Settings
 
