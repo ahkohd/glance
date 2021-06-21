@@ -25,6 +25,10 @@
         .control {
             flex: 1;
             display: flex;
+
+            input {
+                box-sizing: content-box;
+            }
         }
     }
 

@@ -45,7 +45,10 @@ body {
             }
 
             @media screen and (max-width: 1165px) {
+                border-bottom: 1px solid var(--vscode-input-border);
+                margin-bottom: 0.5rem;
                 flex-direction: column-reverse;
+
                 aside {
                     width: 100%;
                 }

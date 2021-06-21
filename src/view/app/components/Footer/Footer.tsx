@@ -4,7 +4,7 @@ import './style.scss'
 const Footer = (): JSX.Element => {
     return (
         <footer>
-            Made with 💜 by <a href="https://github.com/ahkohd">@ahkohd</a>
+            Made with 💜 by <a href="https://twitter.com/ahkohd">@ahkohd</a>
         </footer>
     )
 }
