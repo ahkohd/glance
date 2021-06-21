@@ -1,4 +1,5 @@
 <img src="./media/wordmark.png" style="display: table; margin: 20px auto;">
+<p style="text-align: center">Grace SVG sprites 😌✨</p>
 
 ## About
 
