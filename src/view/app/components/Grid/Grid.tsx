@@ -2,6 +2,7 @@ import React, { useMemo } from 'react'
 import { ElementNode } from 'svg-parser'
 import useStore from 'store/store'
 import './style.scss'
+import GridItem, { SVGRecord } from './GridItem'
 
 const Grid = () => {
     const [{ svgTree, query, config }] = useStore()
@@ -18,7 +19,7 @@ const Grid = () => {
         }
     }
 
-    const assets = useMemo(
+    const assets: SVGRecord[] = useMemo(
         () =>
             (svgTree.children ?? [])
                 .filter((child) =>
@@ -37,46 +38,17 @@ const Grid = () => {
                                 nodeToSvgText(childNode as ElementNode)
                             )
                             .join(''),
-                    }
+                    } as SVGRecord
                 }),
         [query, svgTree, config]
     )
-
-    const getSize = (value: string | undefined) => {
-        const size = parseInt(value ?? '0')
-
-        if (size > 100) {
-            return 100
-        } else if (size < 10) {
-            return 10
-        } else {
-            return size
-        }
-    }
-
-    // @TODO: Refactor
-    // Implement click to copy SVG Id to clipboard
 
     return (
         <div className="content__content">
             {assets.length > 0 ? (
                 <div className="svg_grid">
                     {assets.map((svg, index) => (
-                        <a href="#" key={index} className="svg_grid__preview">
-                            <svg
-                                dangerouslySetInnerHTML={{
-                                    __html: svg.svgText,
-                                }}
-                                width={getSize(config.size)}
-                                height={getSize(config.size)}
-                                viewBox={svg.viewBox as string}
-                                fill="none"
-                                color={config.color}
-                                stroke={config.stroke}
-                                strokeWidth={config.strokeWidth}
-                            ></svg>
-                            <p className="svg_grid__label mt-5">{svg.id}</p>
-                        </a>
+                        <GridItem key={index} svg={svg} />
                     ))}
                 </div>
             ) : (

@@ -1,7 +1,7 @@
 import { join, basename } from 'path'
-import { ExtensionContext, window, Uri } from 'vscode'
+import { ExtensionContext, window, Uri, WebviewPanel } from 'vscode'
 import { parse, RootNode } from 'svg-parser'
-import { Text } from './consts/consts'
+import { Text, WebViewMessage } from './consts/consts'
 import { isASpriteSVG, openWebview } from './utils/fns'
 
 export default class SvgSpritesViewer {
@@ -18,8 +18,10 @@ export default class SvgSpritesViewer {
             window.showErrorMessage(Text.unableToParseSvgDocument)
         } else if (isASpriteSVG(svgTree)) {
             const { extensionPath } = context
-            const viewer = openWebview(documentFileName, extensionPath)
-            viewer.webview.html = this.getWebviewContent(svgTree, extensionPath)
+            const panel = openWebview(documentFileName, extensionPath)
+            panel.webview.html = this.getWebviewContent(svgTree, extensionPath)
+
+            this.attachMessageListner(panel, context)
         } else {
             window.showErrorMessage(Text.notASpriteSvgDocument)
         }
@@ -60,5 +62,35 @@ export default class SvgSpritesViewer {
         </body>
         </html>
     `
+    }
+
+    private attachMessageListner(
+        panel: WebviewPanel,
+        context: ExtensionContext
+    ) {
+        panel.webview.onDidReceiveMessage(
+            (message) => {
+                switch (message.command) {
+                    case WebViewMessage.alert:
+                        SvgSpritesViewerActions.showMessage(message)
+                        return
+                }
+            },
+            undefined,
+            context.subscriptions
+        )
+    }
+}
+
+class SvgSpritesViewerActions {
+    static showMessage(message: any) {
+        switch (message.type) {
+            case 'info':
+                window.showInformationMessage(message.text)
+                break
+            case 'error':
+                window.showErrorMessage(message.text)
+                break
+        }
     }
 }
