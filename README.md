@@ -1,4 +1,4 @@
-<img src="./media/glance.png" style="height: 100px; display: table; margin: 20px auto;">
+<img src="./media/glance-sm.png" style="display: table; margin: 20px auto;">
 <h1 style="text-align: center; border: none; margin-bottom: 0">Glance</h1>
 <p style="text-align: center">Gaze SVG icons gracefully</p>
 
