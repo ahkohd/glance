@@ -16,7 +16,7 @@ interface GridItemProps {
 }
 
 const GridItem = (props: GridItemProps): JSX.Element => {
-    const [{ config }] = useStore()
+    const [{ query, config }] = useStore()
     const { svg } = props
 
     const getSize = (value: string | undefined) => {
@@ -58,7 +58,7 @@ const GridItem = (props: GridItemProps): JSX.Element => {
                 strokeWidth={config.strokeWidth}
             ></svg>
         ),
-        [config]
+        [config, query]
     )
 
     return (

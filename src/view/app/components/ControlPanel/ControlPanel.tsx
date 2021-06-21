@@ -20,16 +20,18 @@ const ControlPanel = () => {
             <ul className="config_controls">
                 <li>
                     <label>Size</label>
-                    <input
-                        type="number"
-                        className="input"
-                        placeholder={'Enter a size'}
-                        value={config.size}
-                        name="size"
-                        onChange={handleChange}
-                        min="1"
-                        max="100"
-                    />
+                    <div className="control">
+                        <input
+                            type="number"
+                            className="input"
+                            placeholder={'Enter a size'}
+                            value={config.size}
+                            name="size"
+                            onChange={handleChange}
+                            min="1"
+                            max="100"
+                        />
+                    </div>
                 </li>
                 <li>
                     <label>Color</label>
@@ -59,26 +61,30 @@ const ControlPanel = () => {
                 </li>
                 <li>
                     <label className="mb-5">Stroke width</label>
-                    <input
-                        type="number"
-                        className="input"
-                        placeholder={'Enter a stroke width'}
-                        value={config.strokeWidth}
-                        name="strokeWidth"
-                        onChange={handleChange}
-                        min="0"
-                    />
+                    <div className="control">
+                        <input
+                            type="number"
+                            className="input"
+                            placeholder={'Enter a stroke width'}
+                            value={config.strokeWidth}
+                            name="strokeWidth"
+                            onChange={handleChange}
+                            min="0"
+                        />
+                    </div>
                 </li>
                 <li>
                     <label className="mb-5">Copy</label>
-                    <select
-                        name="copyType"
-                        className="input"
-                        onChange={handleChange}
-                    >
-                        <option value="assetId">Asset ID</option>
-                        <option value="svgCode">SVG Code</option>
-                    </select>
+                    <div className="control">
+                        <select
+                            name="copyType"
+                            className="input"
+                            onChange={handleChange}
+                        >
+                            <option value="assetId">Asset ID</option>
+                            <option value="svgCode">SVG Code</option>
+                        </select>
+                    </div>
                 </li>
             </ul>
         </aside>

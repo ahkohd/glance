@@ -70,8 +70,22 @@ body {
     }
 }
 
-select.input {
-    height: 42px !important;
+.control {
+    height: 35px;
+    display: flex;
+    overflow: hidden;
+
+    input,
+    select {
+        flex: 1;
+        width: 100%;
+    }
+
+    select {
+        appearance: none;
+        line-height: normal;
+        position: relative;
+    }
 }
 
 label {
