@@ -3,7 +3,7 @@
     "displayName": "Glance",
     "description": "Gaze SVG sprites gracefully.",
     "version": "0.0.1",
-    "icon": "./media/glance.png",
+    "icon": "https://github.com/ahkohd/glance/blob/main/media/glance.png",
     "engines": {
         "vscode": "^1.54.0"
     },
