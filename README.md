@@ -27,7 +27,7 @@ There are two ways to preview SVG sprites with Glance.
 
 -   Follow the first above
 -   `Cmd+Shift+P`, then type `View Sprite`
--   Press enter and voilla 🎉
+-   Press enter. Voilla 🎉
 
 > While at Glance`s preview page, click on an icon to copy it's Id to clipboard. You can confiure this at the controls panel to copy the SVG code instead.
 
