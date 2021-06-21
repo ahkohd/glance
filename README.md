@@ -12,7 +12,7 @@ A `VsCode` extension for previewing [SVG sprites icons](https://css-tricks.com/s
 
 ![Banner](media/banner.png)
 
-> **Psst!** [Watch video to see glance in action 🔥](https://css-tricks.com/svg-symbol-good-choice-icons/)
+> **Psst!** [Watch video to see glance in action! 🔥](https://css-tricks.com/svg-symbol-good-choice-icons/)
 
 ## Extension Settings
 
