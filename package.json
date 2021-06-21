@@ -24,8 +24,7 @@
         "commands": [
             {
                 "command": "glance.open",
-                "title": "View SVG Sprites",
-                "icon": "$(remote-explorer-documentation)"
+                "title": "View SVG Sprites"
             }
         ],
         "menus": {
