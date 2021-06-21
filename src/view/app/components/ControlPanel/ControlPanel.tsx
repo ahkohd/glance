@@ -5,7 +5,9 @@ import './style.scss'
 const ControlPanel = () => {
     const [{ config }, actions] = useStore()
 
-    const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const handleChange = (
+        event: ChangeEvent<HTMLInputElement | HTMLSelectElement>
+    ) => {
         const key = event.target.name
 
         actions.configure({
@@ -66,6 +68,17 @@ const ControlPanel = () => {
                         onChange={handleChange}
                         min="0"
                     />
+                </li>
+                <li>
+                    <label className="mb-5">Copy</label>
+                    <select
+                        name="copyType"
+                        className="input"
+                        onChange={handleChange}
+                    >
+                        <option value="assetId">Asset ID</option>
+                        <option value="svgCode">SVG Code</option>
+                    </select>
                 </li>
             </ul>
         </aside>

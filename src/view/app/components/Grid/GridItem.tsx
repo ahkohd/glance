@@ -1,8 +1,9 @@
 import { WebViewMessage } from 'consts/consts'
-import React from 'react'
+import React, { useMemo } from 'react'
 import useStore from 'store/store'
 import { copyToClipboard } from 'utils/clipboard'
 import { vscode } from 'utils/vscode'
+import { renderToString } from 'react-dom/server'
 
 export interface SVGRecord {
     id: string
@@ -31,7 +32,9 @@ const GridItem = (props: GridItemProps): JSX.Element => {
     }
 
     const handleClick = () => {
-        copyToClipboard(svg.id)
+        copyToClipboard(
+            config.copyType === 'assetId' ? svg.id : renderToString(Svg)
+        )
 
         vscode.postMessage({
             command: WebViewMessage.alert,
@@ -40,8 +43,8 @@ const GridItem = (props: GridItemProps): JSX.Element => {
         })
     }
 
-    return (
-        <a href="#" className="svg_grid__preview" onClick={handleClick}>
+    const Svg = useMemo(
+        () => (
             <svg
                 dangerouslySetInnerHTML={{
                     __html: svg.svgText,
@@ -54,6 +57,13 @@ const GridItem = (props: GridItemProps): JSX.Element => {
                 stroke={config.stroke}
                 strokeWidth={config.strokeWidth}
             ></svg>
+        ),
+        [config]
+    )
+
+    return (
+        <a href="#" className="svg_grid__preview" onClick={handleClick}>
+            {Svg}
             <p className="svg_grid__label mt-5">{svg.id}</p>
         </a>
     )

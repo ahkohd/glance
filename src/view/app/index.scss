@@ -70,6 +70,10 @@ body {
     }
 }
 
+select.input {
+    height: 42px !important;
+}
+
 label {
     font-weight: bold;
     display: block;

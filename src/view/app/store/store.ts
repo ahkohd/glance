@@ -15,6 +15,7 @@ const Store = createStore({
             size: '38',
             strokeWidth: '',
             stroke: '',
+            copyType: 'assetId',
         },
         query: '',
     },
