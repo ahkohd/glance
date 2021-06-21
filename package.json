@@ -1,7 +1,7 @@
 {
     "name": "glance",
     "displayName": "Glance",
-    "description": "Gaze SVG sprites gracefully.",
+    "description": "Grace SVG sprites.",
     "version": "0.0.1",
     "icon": "https://github.com/ahkohd/glance/blob/main/media/glance.png",
     "engines": {
