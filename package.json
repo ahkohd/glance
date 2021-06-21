@@ -3,10 +3,17 @@
     "displayName": "Glance",
     "description": "Gaze SVG sprites gracefully.",
     "version": "0.0.1",
+    "icon": "./media/glance.png",
     "engines": {
         "vscode": "^1.54.0"
     },
+    "author": {
+        "name": "Victor Aremu",
+        "email": "victor.olorunbunmi@gmail.com"
+    },
+    "publisher": "ahkohd",
     "categories": [
+        "Visualization",
         "Other"
     ],
     "activationEvents": [
