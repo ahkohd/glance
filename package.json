@@ -1,7 +1,7 @@
 {
     "name": "glance",
     "displayName": "Glance",
-    "description": "Preview SVG sprites gracefully.",
+    "description": "Gaze SVG sprites gracefully.",
     "version": "0.0.1",
     "engines": {
         "vscode": "^1.54.0"
