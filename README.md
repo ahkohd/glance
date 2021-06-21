@@ -8,7 +8,10 @@ Glance is a VS Code plugin for preview [SVG sprites icons](https://css-tricks.co
 
 ## Features
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+-   [x] A preview for SVG sprite icons
+-   [x] Search icon
+-   [x] Copy icon's ID or SVG
+-   [x] Appearance controls
 
 For example if there is an image subfolder under your extension project workspace:
 
