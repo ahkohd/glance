@@ -28,8 +28,8 @@ Trace:
 
 npm manifest: 
   {
-    "name": "svgspritesviewer",
-    "displayName": "svgspritesviewer",
+    "name": "glance",
+    "displayName": "glance",
     "description": "",
     "version": "0.0.1",
     "engines": {
@@ -45,7 +45,7 @@ npm manifest:
     "contributes": {
       "commands": [
         {
-          "command": "svgspritesviewer.open",
+          "command": "glance.open",
           "title": "View SVG Sprites"
         }
       ]

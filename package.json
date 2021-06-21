@@ -1,7 +1,7 @@
 {
-    "name": "svgspritesviewer",
-    "displayName": "svgspritesviewer",
-    "description": "",
+    "name": "glance",
+    "displayName": "Glance",
+    "description": "Preview SVG sprites gracefully.",
     "version": "0.0.1",
     "engines": {
         "vscode": "^1.54.0"
@@ -16,7 +16,7 @@
     "contributes": {
         "commands": [
             {
-                "command": "svgspritesviewer.open",
+                "command": "glance.open",
                 "title": "View SVG Sprites",
                 "icon": "$(remote-explorer-documentation)"
             }
@@ -25,7 +25,7 @@
             "editor/title": [
                 {
                     "when": "resourceLangId == svg",
-                    "command": "svgspritesviewer.open",
+                    "command": "glance.open",
                     "group": "navigation"
                 }
             ]

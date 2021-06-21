@@ -5,7 +5,7 @@ import SvgSpritesViewer from './SvgSpritesViewer'
 // clicked it will open the SVG sprites view
 
 export function activate(context: ExtensionContext) {
-    let disposable = commands.registerCommand('svgspritesviewer.open', () =>
+    let disposable = commands.registerCommand('glance.open', () =>
         SvgSpritesViewer.instance.onActivate(context)
     )
 
