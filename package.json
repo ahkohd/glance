@@ -17,7 +17,8 @@
         "commands": [
             {
                 "command": "svgspritesviewer.open",
-                "title": "View SVG Sprites"
+                "title": "View SVG Sprites",
+                "icon": "$(remote-explorer-documentation)"
             }
         ],
         "menus": {
