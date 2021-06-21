@@ -1,67 +1,76 @@
 {
-  "name": "svgspritesviewer",
-  "displayName": "svgspritesviewer",
-  "description": "",
-  "version": "0.0.1",
-  "engines": {
-    "vscode": "^1.54.0"
-  },
-  "categories": [
-    "Other"
-  ],
-  "activationEvents": [
-    "onLanguage:svg"
-  ],
-  "main": "./out/extension.js",
-  "contributes": {
-    "commands": [
-      {
-        "command": "svgspritesviewer.open",
-        "title": "View SVG Sprites"
-      }
-    ]
-  },
-  "scripts": {
-    "vscode:prepublish": "yarn run compile",
-    "compile": "npm-run-all compile:*",
-    "watch": "npm-run-all -p watch:*",
-    "pretest": "yarn run compile && yarn run lint",
-    "lint": "eslint src --ext ts",
-    "test": "node ./out/test/runTest.js",
-    "compile:extension": "tsc -p ./",
-    "compile:views": "webpack --mode development",
-    "watch:extension": "tsc -watch -p ./",
-    "watch:views": "webpack --watch --mode development"
-  },
-  "devDependencies": {
-    "@types/glob": "^7.1.3",
-    "@types/mocha": "^8.0.4",
-    "@types/node": "^12.11.7",
-    "@types/svg-parser": "^2.0.1",
-    "@types/vscode": "^1.54.0",
-    "@typescript-eslint/eslint-plugin": "^4.14.1",
-    "@typescript-eslint/parser": "^4.14.1",
-    "eslint": "^7.19.0",
-    "glob": "^7.1.6",
-    "mocha": "^8.2.1",
-    "typescript": "^4.1.3",
-    "vscode-test": "^1.5.0",
-    "webpack-cli": "^4.5.0"
-  },
-  "dependencies": {
-    "@types/react": "^17.0.2",
-    "@types/react-dom": "^17.0.1",
-    "css-loader": "^5.1.1",
-    "eslint-plugin-react": "^7.22.0",
-    "npm-run-all": "^4.1.5",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1",
-    "react-sweet-state": "^2.5.2",
-    "sass": "^1.32.8",
-    "sass-loader": "^11.0.1",
-    "style-loader": "^2.0.0",
-    "svg-parser": "^2.0.4",
-    "ts-loader": "^8.0.17",
-    "webpack": "^5.24.3"
-  }
+    "name": "svgspritesviewer",
+    "displayName": "svgspritesviewer",
+    "description": "",
+    "version": "0.0.1",
+    "engines": {
+        "vscode": "^1.54.0"
+    },
+    "categories": [
+        "Other"
+    ],
+    "activationEvents": [
+        "onLanguage:svg"
+    ],
+    "main": "./out/extension.js",
+    "contributes": {
+        "commands": [
+            {
+                "command": "svgspritesviewer.open",
+                "title": "View SVG Sprites"
+            }
+        ],
+        "menus": {
+            "editor/title": [
+                {
+                    "when": "resourceLangId == svg",
+                    "command": "svgspritesviewer.open",
+                    "group": "navigation"
+                }
+            ]
+        }
+    },
+    "scripts": {
+        "vscode:prepublish": "yarn run compile",
+        "compile": "npm-run-all compile:*",
+        "watch": "npm-run-all -p watch:*",
+        "pretest": "yarn run compile && yarn run lint",
+        "lint": "eslint src --ext ts",
+        "test": "node ./out/test/runTest.js",
+        "compile:extension": "tsc -p ./",
+        "compile:views": "webpack --mode development",
+        "watch:extension": "tsc -watch -p ./",
+        "watch:views": "webpack --watch --mode development"
+    },
+    "devDependencies": {
+        "@types/glob": "^7.1.3",
+        "@types/mocha": "^8.0.4",
+        "@types/node": "^12.11.7",
+        "@types/svg-parser": "^2.0.1",
+        "@types/vscode": "^1.54.0",
+        "@typescript-eslint/eslint-plugin": "^4.14.1",
+        "@typescript-eslint/parser": "^4.14.1",
+        "eslint": "^7.19.0",
+        "glob": "^7.1.6",
+        "mocha": "^8.2.1",
+        "typescript": "^4.1.3",
+        "vscode-test": "^1.5.0",
+        "webpack-cli": "^4.5.0"
+    },
+    "dependencies": {
+        "@types/react": "^17.0.2",
+        "@types/react-dom": "^17.0.1",
+        "css-loader": "^5.1.1",
+        "eslint-plugin-react": "^7.22.0",
+        "npm-run-all": "^4.1.5",
+        "react": "^17.0.1",
+        "react-dom": "^17.0.1",
+        "react-sweet-state": "^2.5.2",
+        "sass": "^1.32.8",
+        "sass-loader": "^11.0.1",
+        "style-loader": "^2.0.0",
+        "svg-parser": "^2.0.4",
+        "ts-loader": "^8.0.17",
+        "webpack": "^5.24.3"
+    }
 }

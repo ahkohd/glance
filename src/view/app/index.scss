@@ -70,16 +70,6 @@ body {
     }
 }
 
-.input--error {
-    background: var(--vscode-input-errorBackground);
-    color: var(--vscode-input-errorForeground);
-    border-color: (--vscode-input-errorBorder);
-
-    &:focus {
-        border: 1px solid var(--vscode-input-errorBorder);
-    }
-}
-
 label {
     font-weight: bold;
     display: block;
@@ -87,6 +77,7 @@ label {
 
 .text--error {
     color: var(--vscode-input-foreground);
+    opacity: 0.6;
 }
 
 .text--italics {
