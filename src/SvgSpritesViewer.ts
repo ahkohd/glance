@@ -1,4 +1,4 @@
-import { join } from 'path'
+import { join, basename } from 'path'
 import { ExtensionContext, window, Uri } from 'vscode'
 import { parse, RootNode } from 'svg-parser'
 import { Text } from './consts/consts'
@@ -8,6 +8,9 @@ export default class SvgSpritesViewer {
     public static instance = new SvgSpritesViewer()
 
     public onActivate(context: ExtensionContext): void {
+        const documentFileName = basename(
+            window.activeTextEditor?.document.fileName ?? ''
+        )
         const documentSourceCode = window.activeTextEditor?.document.getText()
         const svgTree = parse(documentSourceCode!) ?? null
 
@@ -15,8 +18,7 @@ export default class SvgSpritesViewer {
             window.showErrorMessage(Text.unableToParseSvgDocument)
         } else if (isASpriteSVG(svgTree)) {
             const { extensionPath } = context
-            const viewer = openWebview(extensionPath)
-
+            const viewer = openWebview(documentFileName, extensionPath)
             viewer.webview.html = this.getWebviewContent(svgTree, extensionPath)
         } else {
             window.showErrorMessage(Text.notASpriteSvgDocument)

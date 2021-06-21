@@ -4,4 +4,4 @@ export enum Text {
 }
 
 export const WEB_VIEW_NAME = 'svg-sprite-preview'
-export const WEB_VIEW_TITLE = '🖼 SVG Sprites Preview'
+export const WEB_VIEW_TITLE = '🖼 SVG sprites [Preview]'

@@ -3,10 +3,13 @@ import { join } from 'path'
 import { RootNode, ElementNode } from 'svg-parser'
 import { WEB_VIEW_NAME, WEB_VIEW_TITLE } from '../consts/consts'
 
-export const openWebview = (extensionPath: string) => {
+export const openWebview = (
+    documentFileName: string,
+    extensionPath: string
+) => {
     return vscode.window.createWebviewPanel(
         WEB_VIEW_NAME,
-        WEB_VIEW_TITLE,
+        WEB_VIEW_TITLE.replace('SVG', documentFileName),
         vscode.ViewColumn.One,
         {
             enableScripts: true,
