@@ -2,9 +2,9 @@
 <h1 style="text-align: center; border: none; margin-bottom: 0">Glance</h1>
 <p style="text-align: center">Grace SVG sprites 😌✨</p>
 
-## ℹ️ About
+## About
 
-Glance is a VS Code plugin for preview [SVG sprites icons](https://css-tricks.com/svg-symbol-good-choice-icons/) gracefully.
+Glance is a VS Code extension for previewing [SVG sprites icons](https://css-tricks.com/svg-symbol-good-choice-icons/) gracefully.
 
 ## ✨ Features
 
