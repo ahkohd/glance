@@ -20,8 +20,8 @@ There are two ways to preview SVG sprites with Glance.
 
 ### First method
 
--   Open a SVG file that has sprites, make sure it's your active editor
--   Click on `View Sprites` button at the editor title bar
+-   Open a SVG file that has sprites, make sure this is your active editor
+-   Click on `View Sprites` button at the editor title bar. Voilla 🎉
 
 ### Second method
 
