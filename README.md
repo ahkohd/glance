@@ -1,6 +1,6 @@
 <img src="./media/glance-sm.png" style="height: 100px; display: table; margin: 20px auto;">
 <h1 style="text-align: center; border: none; margin-bottom: 0">Glance</h1>
-<p style="text-align: center">Grace SVG sprites</p>
+<p style="text-align: center">Grace SVG sprites 😌✨</p>
 
 # 🙈 About
 
@@ -8,9 +8,9 @@ Glance is a VS Code plugin for preview [SVG sprites icons](https://css-tricks.co
 
 ## Features
 
--   [x] A preview for SVG sprite icons
--   [x] Search icon
--   [x] Copy icon's ID or SVG
+-   [x] A preview for SVG sprites
+-   [x] Search icons
+-   [x] Copy icon's ID or SVG to clipboard
 -   [x] Appearance controls
 
 For example if there is an image subfolder under your extension project workspace:
