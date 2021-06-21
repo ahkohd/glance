@@ -21,12 +21,12 @@ There are two ways to preview SVG sprites with Glance.
 ### First method
 
 -   Open a SVG file that has sprites, make sure this is your active editor
--   Click on `View Sprites` button at the editor title bar. Voilla 🎉
+-   Click on `Glance` button at the editor title bar. Voilla 🎉
 
 ### Second method
 
 -   Follow the first above
--   `Cmd+Shift+P`, then type `View Sprite`
+-   `Cmd+Shift+P`, then type `Glance`
 -   Press enter. Voilla 🎉
 
 > While at Glance`s preview page, click on an icon to copy it's Id to clipboard. You can confiure this at the controls panel to copy the SVG code instead.

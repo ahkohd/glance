@@ -24,7 +24,7 @@
         "commands": [
             {
                 "command": "glance.open",
-                "title": "View SVG Sprites"
+                "title": "Glance"
             }
         ],
         "menus": {
