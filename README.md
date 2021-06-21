@@ -12,7 +12,24 @@ A `VsCode` extension for previewing [SVG sprites icons](https://css-tricks.com/s
 
 ![Banner](media/banner.png)
 
-> **Psst!** [Watch video to see glance in action! 🔥](https://css-tricks.com/svg-symbol-good-choice-icons/)
+> **Psst** [Watch video to see glance in action! 🔥](https://css-tricks.com/svg-symbol-good-choice-icons/)
+
+## 💪 Usage
+
+There are two ways to preview SVG sprites with Glance.
+
+### First method
+
+-   Open a SVG file that has sprites, make sure it's your active editor
+-   Click on `View Sprites` button at the editor title bar
+
+### Second method
+
+-   Follow the first above
+-   `Cmd+Shift+P`, then type `View Sprite`
+-   Press enter and voilla 🎉
+
+> While at Glance`s preview page, click on an icon to copy it's Id to clipboard. You can confiure this at the controls panel to copy the SVG code instead.
 
 <!-- ## Extension Settings
 
@@ -25,7 +42,7 @@ This extension contributes the following settings:
 -   `myExtension.enable`: enable/disable this extension
 -   `myExtension.thing`: set to `blah` to do something -->
 
-## Release Notes
+## 📝 Release Notes
 
 ### 0.0.1
 
