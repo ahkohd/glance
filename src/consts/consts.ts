@@ -1,6 +1,6 @@
 export enum Text {
     unableToParseSvgDocument = 'Oops! Unable to parse SVG document',
-    notASpriteSvgDocument = 'Oops! SVG does not contain sprites',
+    notASpriteSvgDocument = 'Oops! No sprite was found in the SVG file',
 }
 
 export const WEB_VIEW_NAME = 'svg-sprite-preview'
