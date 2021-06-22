@@ -2,8 +2,13 @@
     "name": "glance",
     "displayName": "Glance",
     "description": "Grace SVG sprites.",
-    "version": "0.0.2",
-    "icon": "https://github.com/ahkohd/glance/blob/main/media/glance.png",
+    "version": "0.0.0",
+    "icon": "media/glance.png",
+    "homepage": "https://github.com/ahkohd/glance/blob/master/README.md",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/ahkohd/glance.git"
+    },
     "engines": {
         "vscode": "^1.54.0"
     },
