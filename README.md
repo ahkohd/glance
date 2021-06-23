@@ -1,7 +1,7 @@
 <img src="./media/glance-sm.png" style="height: 100px; display: table; margin: 20px auto;">
 <h1 style="text-align: center; border: none; margin-bottom: 0">Glance</h1>
 
-A `VSCode` extension for viewing [SVG sprites](https://css-tricks.com/svg-symbol-good-choice-icons/) easy peasy.
+A `VSCode` extension for viewing [SVG sprites](https://css-tricks.com/svg-symbol-good-choice-icons/) easy-peasy.
 
 ## ✨ Features
 
