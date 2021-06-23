@@ -81,7 +81,7 @@ const ControlPanel = () => {
                             className="input"
                             onChange={handleChange}
                         >
-                            <option value="assetId">Asset ID</option>
+                            <option value="assetId">Asset's ID</option>
                             <option value="svgCode">SVG Code</option>
                         </select>
                     </div>
