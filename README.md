@@ -46,9 +46,9 @@ This extension contributes the following settings:
 
 ### 0.0.1
 
-Initial release of Glance
+- Initial release of Glance
 
 ### 0.0.2
 
 -   Fix some typos
--   Fix single grid item flush when issue
+-   Fix single grid item flush issue
