@@ -12,18 +12,27 @@ export default class SvgSpritesViewer {
             window.activeTextEditor?.document.fileName ?? ''
         )
         const documentSourceCode = window.activeTextEditor?.document.getText()
-        const svgTree = parse(documentSourceCode!) ?? null
+        const documentLanguage = window.activeTextEditor?.document.languageId
 
-        if (!svgTree) {
-            window.showErrorMessage(Text.unableToParseSvgDocument)
-        } else if (isASpriteSVG(svgTree)) {
-            const { extensionPath } = context
-            const panel = openWebview(documentFileName, extensionPath)
-            panel.webview.html = this.getWebviewContent(svgTree, extensionPath)
+        if (documentLanguage === 'svg') {
+            const svgTree = parse(documentSourceCode!) ?? null
 
-            this.attachMessageListner(panel, context)
+            if (!svgTree) {
+                window.showErrorMessage(Text.unableToParseSvgDocument)
+            } else if (isASpriteSVG(svgTree)) {
+                const { extensionPath } = context
+                const panel = openWebview(documentFileName, extensionPath)
+
+                panel.webview.html = this.getWebviewContent(
+                    svgTree,
+                    extensionPath
+                )
+                this.attachMessageListner(panel, context)
+            } else {
+                window.showErrorMessage(Text.notASpriteSvgDocument)
+            }
         } else {
-            window.showErrorMessage(Text.notASpriteSvgDocument)
+            window.showErrorMessage(Text.notASVGDocument)
         }
     }
 
