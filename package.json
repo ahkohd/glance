@@ -23,6 +23,7 @@
     ],
     "activationEvents": [
         "onLanguage:svg",
+        "onLanguage:xml",
         "onCommand:glance.open"
     ],
     "main": "./out/extension.js",
@@ -37,6 +38,11 @@
             "editor/title": [
                 {
                     "when": "resourceLangId == svg",
+                    "command": "glance.open",
+                    "group": "navigation"
+                },
+                {
+                    "when": "resourceLangId == xml",
                     "command": "glance.open",
                     "group": "navigation"
                 }
