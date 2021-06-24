@@ -7,14 +7,17 @@ import { isASpriteSVG, openWebview } from './utils/fns'
 export default class SvgSpritesViewer {
     public static instance = new SvgSpritesViewer()
 
+    public static supportedLanguages = ['xml', 'svg']
+
     public onActivate(context: ExtensionContext): void {
         const documentFileName = basename(
             window.activeTextEditor?.document.fileName ?? ''
         )
         const documentSourceCode = window.activeTextEditor?.document.getText()
-        const documentLanguage = window.activeTextEditor?.document.languageId
+        const documentLanguage =
+            window.activeTextEditor?.document.languageId ?? ''
 
-        if (documentLanguage === 'svg') {
+        if (SvgSpritesViewer.supportedLanguages.includes(documentLanguage)) {
             const svgTree = parse(documentSourceCode!) ?? null
 
             if (!svgTree) {
