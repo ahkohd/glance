@@ -64,3 +64,8 @@ This extension contributes the following settings:
 ### 0.0.5
 
 -   Fix activation issue bug
+
+### 0.0.6
+
+-   Activate plugin when runs the Glance command
+-   Also activate plugin when user views XML documents
