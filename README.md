@@ -60,3 +60,7 @@ This extension contributes the following settings:
 ### 0.0.4
 
 -   Bug fixes
+
+### 0.0.5
+
+-   Fix activation issue bug
