@@ -22,7 +22,8 @@
         "Other"
     ],
     "activationEvents": [
-        "onLanguage:svg"
+        "onLanguage:svg",
+        "onCommand:glance.open"
     ],
     "main": "./out/extension.js",
     "contributes": {
