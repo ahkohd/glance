@@ -56,3 +56,7 @@ This extension contributes the following settings:
 ### 0.0.3
 
 -   Fix some typos
+
+### 0.0.4
+
+-   Bug fixes
