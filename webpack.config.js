@@ -11,7 +11,7 @@ module.exports = {
     devtool: 'eval-source-map',
     resolve: {
         extensions: ['.js', '.ts', '.tsx', '.json'],
-        modules: ['node_modules', path.resolve(__dirname, './src/view/app')]
+        modules: ['node_modules', path.resolve(__dirname, './src/view/app')],
     },
     module: {
         rules: [
@@ -19,6 +19,10 @@ module.exports = {
                 test: /\.(ts|tsx)$/,
                 loader: 'ts-loader',
                 options: {},
+            },
+            {
+                test: /\.(svg)$/,
+                type: 'asset/inline',
             },
             {
                 test: /\.scss$/,
