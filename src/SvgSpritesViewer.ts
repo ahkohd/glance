@@ -10,11 +10,15 @@ import { parse, RootNode } from 'svg-parser'
 import { WebViewMessage } from './view/app/consts/message'
 import { Text } from './consts/consts'
 import { isASpriteSVG, openWebview } from './utils/fns'
+const shortid = require('shortid')
 
 export default class SvgSpritesViewer {
     public static instance = new SvgSpritesViewer()
 
-    public static textDocument: TextDocument
+    public static textDocuments: Map<string, TextDocument> = new Map<
+        string,
+        TextDocument
+    >()
 
     public static supportedLanguages = ['xml', 'svg']
 
@@ -22,16 +26,25 @@ export default class SvgSpritesViewer {
         const activeTextEditor = window.activeTextEditor
 
         if (activeTextEditor?.document) {
-            SvgSpritesViewer.glanceDocument(activeTextEditor.document, context)
+            const documentId = shortid.generate()
 
-            SvgSpritesViewer.textDocument = activeTextEditor.document
+            SvgSpritesViewer.glanceDocument(
+                documentId,
+                activeTextEditor.document,
+                context
+            )
+            SvgSpritesViewer.textDocuments.set(
+                documentId,
+                activeTextEditor.document
+            )
         } else {
             window.showErrorMessage(Text.notASVGDocument)
         }
     }
 
     public static glanceDocument(
-        document: Pick<TextDocument, 'fileName' | 'getText' | 'languageId'>,
+        textDocumentId: string,
+        document: TextDocument,
         context: ExtensionContext
     ): void {
         const { fileName, getText, languageId } = document
@@ -47,10 +60,15 @@ export default class SvgSpritesViewer {
 
                 panel.webview.html = SvgSpritesViewer.getWebviewContent(
                     svgTree,
-                    extensionPath
+                    extensionPath,
+                    textDocumentId
                 )
 
                 SvgSpritesViewerActions.attachListenerToPanel(panel, context)
+
+                panel.onDidDispose(() =>
+                    SvgSpritesViewer.textDocuments.delete(textDocumentId)
+                )
             } else {
                 window.showErrorMessage(Text.notASpriteSvgDocument)
             }
@@ -61,7 +79,8 @@ export default class SvgSpritesViewer {
 
     public static getWebviewContent(
         svgTree: RootNode,
-        extensionPath: string
+        extensionPath: string,
+        textDocumentId: string
     ): string {
         const reactAppPathOnDisk = Uri.file(
             join(extensionPath, 'out', 'svgSpriteViewer.js')
@@ -85,6 +104,7 @@ export default class SvgSpritesViewer {
     
             <script>
                 window.initialData = ${JSON.stringify(svgTree)};
+                window.textDocumentId = "${textDocumentId}";
             </script>
         </head>
         <body>
@@ -95,18 +115,23 @@ export default class SvgSpritesViewer {
     `
     }
 
-    static reloadWebview(context: ExtensionContext, panel: WebviewPanel) {
+    static reloadWebview(
+        textDocumentId: string,
+        context: ExtensionContext,
+        panel: WebviewPanel
+    ) {
         try {
-            const { getText } = SvgSpritesViewer.textDocument
+            const { getText } =
+                SvgSpritesViewer.textDocuments.get(textDocumentId)!
             const { extensionPath } = context
             const svgTree = parse(getText()) ?? null
 
             panel.webview.html = SvgSpritesViewer.getWebviewContent(
                 svgTree,
-                extensionPath
+                extensionPath,
+                textDocumentId
             )
         } catch (e) {
-            console.error(e)
             window.showErrorMessage(Text.unableToRefreshWebview)
         }
     }
@@ -124,7 +149,11 @@ class SvgSpritesViewerActions {
                         SvgSpritesViewerActions.showMessage(message)
                         break
                     case WebViewMessage.reload:
-                        SvgSpritesViewer.reloadWebview(context, panel)
+                        SvgSpritesViewer.reloadWebview(
+                            message.textDocumentId,
+                            context,
+                            panel
+                        )
                         break
                 }
             },

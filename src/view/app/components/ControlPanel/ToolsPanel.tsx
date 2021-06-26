@@ -8,6 +8,7 @@ const ToolsPanel = () => {
     const handleRefresh = () => {
         vscode.postMessage({
             command: WebViewMessage.reload,
+            textDocumentId: (window as any).textDocumentId,
         })
     }
 
