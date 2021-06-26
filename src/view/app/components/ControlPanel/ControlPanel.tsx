@@ -1,6 +1,8 @@
+import Searchbar from 'components/Searchbar/Searchbar'
 import React, { ChangeEvent } from 'react'
 import useStore from 'store/store'
 import './style.scss'
+import ToolsPanel from './ToolsPanel'
 
 const ControlPanel = () => {
     const [{ config }, actions] = useStore()
@@ -16,7 +18,9 @@ const ControlPanel = () => {
     }
 
     return (
-        <aside>
+        <aside className="control_panel">
+            <ToolsPanel />
+            <Searchbar />
             <ul className="config_controls">
                 <li>
                     <label>Size</label>

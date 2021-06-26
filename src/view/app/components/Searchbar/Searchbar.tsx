@@ -28,7 +28,7 @@ const Searchbar = () => {
             <input
                 type="search"
                 ref={inputRef}
-                className="input input__searchbar mb-20"
+                className="input input__searchbar mb-15"
                 placeholder={`Search ${svgTree.children.length} sprites (Press "/" to focus)`}
                 onChange={handleChange}
             />

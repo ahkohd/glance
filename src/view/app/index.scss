@@ -106,10 +106,35 @@ label {
     margin-bottom: 20px;
 }
 
+.mb-15 {
+    margin-bottom: 12px;
+}
+
 .mb-5 {
     margin-bottom: 5px;
 }
 
+.mr-5 {
+    margin-right: 5px;
+}
+
 .mt-5 {
     margin-top: 10px;
+}
+
+.btn--icon {
+    background: transparent;
+    padding: 2px;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    border-radius: 4px;
+
+    &:hover {
+        background: rgba(255, 225, 255, 0.1);
+    }
+
+    &:focus {
+        outline: 1px solid var(--vscode-input-border);
+    }
 }

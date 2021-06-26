@@ -1,7 +1,12 @@
+.control_panel {
+    padding-left: 1rem;
+}
+
 .config_controls {
     list-style: none;
     display: flex;
     flex-direction: column;
+    padding: 0;
 
     label {
         margin-bottom: 5px;
@@ -43,5 +48,16 @@
             padding: 0;
             margin: 0;
         }
+    }
+}
+
+.tools_panel {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    .tools_panel__actions {
+        display: flex;
+        align-items: center;
     }
 }

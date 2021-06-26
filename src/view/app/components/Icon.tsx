@@ -1,5 +1,5 @@
 import React, { FC, MouseEvent, CSSProperties } from 'react'
-import icons from './assets/icons.svg'
+import icons from '../assets/icons.svg'
 
 export interface IconProps {
     width?: string | number
@@ -28,7 +28,7 @@ const Icon: FC<IconProps> = ({
             height={size ?? height}
             className={className}
             onClick={onClick}
-            style={{ color: color || 'white', ...style }}
+            style={{ color: color || 'rgba(255, 255, 255, .5)', ...style }}
         >
             <use xlinkHref={`${icons}#${id}`} />
         </svg>

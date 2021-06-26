@@ -14,6 +14,8 @@ import { isASpriteSVG, openWebview } from './utils/fns'
 export default class SvgSpritesViewer {
     public static instance = new SvgSpritesViewer()
 
+    public static textDocument: TextDocument
+
     public static supportedLanguages = ['xml', 'svg']
 
     public onActivate(context: ExtensionContext): void {
@@ -21,13 +23,15 @@ export default class SvgSpritesViewer {
 
         if (activeTextEditor?.document) {
             SvgSpritesViewer.glanceDocument(activeTextEditor.document, context)
+
+            SvgSpritesViewer.textDocument = activeTextEditor.document
         } else {
             window.showErrorMessage(Text.notASVGDocument)
         }
     }
 
-    private static glanceDocument(
-        document: TextDocument,
+    public static glanceDocument(
+        document: Pick<TextDocument, 'fileName' | 'getText' | 'languageId'>,
         context: ExtensionContext
     ): void {
         const { fileName, getText, languageId } = document
@@ -73,10 +77,9 @@ export default class SvgSpritesViewer {
         <head>
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>Config View</title>
+            <title>Glance</title>
             <meta http-equiv="Content-Security-Policy"
-                content="default-src 'none';
-                        img-src https:;
+                content="
                         script-src 'unsafe-eval' 'unsafe-inline' vscode-resource:;
                         style-src vscode-resource: 'unsafe-inline';">
     
@@ -91,6 +94,22 @@ export default class SvgSpritesViewer {
         </html>
     `
     }
+
+    static reloadWebview(context: ExtensionContext, panel: WebviewPanel) {
+        try {
+            const { getText } = SvgSpritesViewer.textDocument
+            const { extensionPath } = context
+            const svgTree = parse(getText()) ?? null
+
+            panel.webview.html = SvgSpritesViewer.getWebviewContent(
+                svgTree,
+                extensionPath
+            )
+        } catch (e) {
+            console.error(e)
+            window.showErrorMessage(Text.unableToRefreshWebview)
+        }
+    }
 }
 
 class SvgSpritesViewerActions {
@@ -103,7 +122,10 @@ class SvgSpritesViewerActions {
                 switch (message.command) {
                     case WebViewMessage.alert:
                         SvgSpritesViewerActions.showMessage(message)
-                        return
+                        break
+                    case WebViewMessage.reload:
+                        SvgSpritesViewer.reloadWebview(context, panel)
+                        break
                 }
             },
             undefined,
