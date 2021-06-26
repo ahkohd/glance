@@ -1,5 +1,11 @@
 import { join, basename } from 'path'
-import { ExtensionContext, window, Uri, WebviewPanel } from 'vscode'
+import {
+    ExtensionContext,
+    window,
+    Uri,
+    WebviewPanel,
+    TextDocument,
+} from 'vscode'
 import { parse, RootNode } from 'svg-parser'
 import { Text, WebViewMessage } from './consts/consts'
 import { isASpriteSVG, openWebview } from './utils/fns'
@@ -10,27 +16,36 @@ export default class SvgSpritesViewer {
     public static supportedLanguages = ['xml', 'svg']
 
     public onActivate(context: ExtensionContext): void {
-        const documentFileName = basename(
-            window.activeTextEditor?.document.fileName ?? ''
-        )
-        const documentSourceCode = window.activeTextEditor?.document.getText()
-        const documentLanguage =
-            window.activeTextEditor?.document.languageId ?? ''
+        const activeTextEditor = window.activeTextEditor
 
-        if (SvgSpritesViewer.supportedLanguages.includes(documentLanguage)) {
-            const svgTree = parse(documentSourceCode!) ?? null
+        if (activeTextEditor?.document) {
+            SvgSpritesViewer.glanceDocument(activeTextEditor.document, context)
+        } else {
+            window.showErrorMessage(Text.notASVGDocument)
+        }
+    }
+
+    private static glanceDocument(
+        document: TextDocument,
+        context: ExtensionContext
+    ): void {
+        const { fileName, getText, languageId } = document
+
+        if (SvgSpritesViewer.supportedLanguages.includes(languageId)) {
+            const svgTree = parse(getText()) ?? null
 
             if (!svgTree) {
                 window.showErrorMessage(Text.unableToParseSvgDocument)
             } else if (isASpriteSVG(svgTree)) {
                 const { extensionPath } = context
-                const panel = openWebview(documentFileName, extensionPath)
+                const panel = openWebview(basename(fileName), extensionPath)
 
-                panel.webview.html = this.getWebviewContent(
+                panel.webview.html = SvgSpritesViewer.getWebviewContent(
                     svgTree,
                     extensionPath
                 )
-                this.attachMessageListner(panel, context)
+
+                SvgSpritesViewerActions.attachListenerToPanel(panel, context)
             } else {
                 window.showErrorMessage(Text.notASpriteSvgDocument)
             }
@@ -39,7 +54,7 @@ export default class SvgSpritesViewer {
         }
     }
 
-    private getWebviewContent(
+    public static getWebviewContent(
         svgTree: RootNode,
         extensionPath: string
     ): string {
@@ -75,11 +90,13 @@ export default class SvgSpritesViewer {
         </html>
     `
     }
+}
 
-    private attachMessageListner(
+class SvgSpritesViewerActions {
+    public static attachListenerToPanel(
         panel: WebviewPanel,
         context: ExtensionContext
-    ) {
+    ): void {
         panel.webview.onDidReceiveMessage(
             (message) => {
                 switch (message.command) {
@@ -92,10 +109,8 @@ export default class SvgSpritesViewer {
             context.subscriptions
         )
     }
-}
 
-class SvgSpritesViewerActions {
-    static showMessage(message: any) {
+    static showMessage(message: any): void {
         switch (message.type) {
             case 'info':
                 window.showInformationMessage(message.text)
