@@ -1,4 +1,4 @@
-import { WebViewMessage } from 'consts/consts'
+import { WebViewMessage } from 'consts/message'
 import React, { useMemo } from 'react'
 import useStore from 'store/store'
 import { copyToClipboard } from 'utils/clipboard'

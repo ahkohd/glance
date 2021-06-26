@@ -7,7 +7,8 @@ import {
     TextDocument,
 } from 'vscode'
 import { parse, RootNode } from 'svg-parser'
-import { Text, WebViewMessage } from './consts/consts'
+import { WebViewMessage } from './view/app/consts/message'
+import { Text } from './consts/consts'
 import { isASpriteSVG, openWebview } from './utils/fns'
 
 export default class SvgSpritesViewer {
