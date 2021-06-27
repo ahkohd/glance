@@ -1,9 +1,9 @@
-import SvgSpritesViewer from './SvgSpritesViewer'
 import { WebviewPanel, ExtensionContext, window } from 'vscode'
-import { WebViewMessage } from './view/app/consts/message'
+import { WebViewMessage } from '../view/app/consts/message'
+import SvgSpritesViewerDocumentActions from './SvgSpritesViewerDocumentActions'
 
 export class SvgSpritesViewerActions {
-    public static attachListenerToPanel(
+    static attachListenerToPanel(
         panel: WebviewPanel,
         context: ExtensionContext
     ): void {
@@ -14,7 +14,7 @@ export class SvgSpritesViewerActions {
                         SvgSpritesViewerActions.showMessage(message)
                         break
                     case WebViewMessage.reload:
-                        SvgSpritesViewer.reloadWebview(
+                        SvgSpritesViewerDocumentActions.reloadWebview(
                             message.textDocumentId,
                             context,
                             panel

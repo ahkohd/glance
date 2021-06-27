@@ -1,5 +1,5 @@
 import { ExtensionContext, commands } from 'vscode'
-import SvgSpritesViewer from './SvgSpritesViewer'
+import SvgSpritesViewer from './core/SvgSpritesViewer'
 
 export function activate(context: ExtensionContext) {
     let disposable = commands.registerCommand('glance.open', () =>
