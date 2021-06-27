@@ -44,10 +44,10 @@ export default class SvgSpritesViewer {
 
     public static glanceDocument(
         textDocumentId: string,
-        document: TextDocument,
+        textDocument: TextDocument,
         context: ExtensionContext
     ): void {
-        const { fileName, getText, languageId } = document
+        const { fileName, getText, languageId } = textDocument
 
         if (SvgSpritesViewer.supportedLanguages.includes(languageId)) {
             const svgTree = parse(getText()) ?? null
