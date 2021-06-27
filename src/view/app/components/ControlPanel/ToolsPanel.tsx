@@ -21,11 +21,12 @@ const ToolsPanel = () => {
                 Array.from(files).map((file) => file.text())
             )
 
-            console.log(svgs, 'svgs')
-
             vscode.postMessage({
                 command: WebViewMessage.addNewSprites,
-                svgs,
+                sprites: svgs.map((svg, i) => ({
+                    svg,
+                    name: files[i].name,
+                })),
             })
         }
     }
