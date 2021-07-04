@@ -15,7 +15,15 @@ export class SvgSpritesViewerActions {
                         break
                     case WebViewMessage.reload:
                         SvgSpritesViewerDocumentActions.reloadWebview(
-                            message.textDocumentId,
+                            message.textEditorId,
+                            context,
+                            panel
+                        )
+                        break
+                    case WebViewMessage.addNewSprites:
+                        SvgSpritesViewerDocumentActions.addNewSprites(
+                            message.svgs,
+                            message.textEditorId,
                             context,
                             panel
                         )

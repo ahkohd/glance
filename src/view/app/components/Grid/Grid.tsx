@@ -1,23 +1,12 @@
 import React, { useMemo } from 'react'
 import { ElementNode } from 'svg-parser'
 import useStore from 'store/store'
-import './style.scss'
 import GridItem, { SVGRecord } from './GridItem'
+import { nodeToSvgText } from 'utils/fns'
+import './style.scss'
 
 const Grid = () => {
     const [{ svgTree, query, config }] = useStore()
-
-    const nodeToSvgText = (node: ElementNode): string => {
-        if (node.type === 'element') {
-            return `<${node.tagName} ${Object.entries(node.properties as any)
-                .map((entry) => `${entry[0]}="${entry[1]}"`)
-                .join(' ')}>${node.children
-                .map((children) => nodeToSvgText(children as ElementNode))
-                .join('')}</${node.tagName}>`
-        } else {
-            return ''
-        }
-    }
 
     const assets: SVGRecord[] = useMemo(
         () =>

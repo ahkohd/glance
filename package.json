@@ -92,6 +92,7 @@
         "style-loader": "^2.0.0",
         "svg-parser": "^2.0.4",
         "ts-loader": "^8.0.17",
-        "webpack": "^5.24.3"
+        "webpack": "^5.24.3",
+        "xml-formatter": "^2.4.0"
     }
 }

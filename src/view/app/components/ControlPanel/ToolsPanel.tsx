@@ -8,7 +8,7 @@ const ToolsPanel = () => {
     const handleRefresh = () => {
         vscode.postMessage({
             command: WebViewMessage.reload,
-            textDocumentId: (window as any).textDocumentId,
+            textEditorId: (window as any).textEditorId,
         })
     }
 
@@ -23,7 +23,8 @@ const ToolsPanel = () => {
 
             vscode.postMessage({
                 command: WebViewMessage.addNewSprites,
-                sprites: svgs.map((svg, i) => ({
+                textEditorId: (window as any).textEditorId,
+                svgs: svgs.map((svg, i) => ({
                     svg,
                     name: files[i].name,
                 })),

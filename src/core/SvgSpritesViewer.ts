@@ -1,4 +1,4 @@
-import { ExtensionContext, window, TextDocument } from 'vscode'
+import { ExtensionContext, window, TextEditor } from 'vscode'
 import SvgSpritesViewerDocumentActions from './SvgSpritesViewerDocumentActions'
 import { Text } from './consts/consts'
 const shortid = require('shortid')
@@ -6,9 +6,9 @@ const shortid = require('shortid')
 export default class SvgSpritesViewer {
     public static instance = new SvgSpritesViewer()
 
-    public static textDocuments: Map<string, TextDocument> = new Map<
+    public static textEditors: Map<string, TextEditor> = new Map<
         string,
-        TextDocument
+        TextEditor
     >()
 
     public static supportedLanguages = ['xml', 'svg']
@@ -24,10 +24,7 @@ export default class SvgSpritesViewer {
                 activeTextEditor.document,
                 context
             )
-            SvgSpritesViewer.textDocuments.set(
-                documentId,
-                activeTextEditor.document
-            )
+            SvgSpritesViewer.textEditors.set(documentId, activeTextEditor)
         } else {
             window.showErrorMessage(Text.notASVGDocument)
         }
