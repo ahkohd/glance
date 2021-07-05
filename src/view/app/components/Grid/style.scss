@@ -15,11 +15,17 @@
         text-decoration: none;
         border: 1px dotted transparent;
         max-width: 128px;
+        position: relative;
 
         &:hover {
             color: var(--vscode-input-foreground);
             cursor: pointer;
             border-color: var(--vscode-input-border);
+
+            .svg_grid__actions {
+                opacity: 1;
+                pointer-events: all;
+            }
         }
     }
 
@@ -27,8 +33,38 @@
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
-        width: 80%;
+        width: 70%;
         text-align: center;
+        border: none;
+        background: transparent;
+        font-family: var(--vscode-editor-font-family);
+        color: rgba($color: #fff, $alpha: 0.7);
+
+        &:read-only {
+            cursor: pointer;
+            outline: none;
+            user-select: none !important;
+        }
+    }
+
+    .svg_grid__actions {
+        display: flex;
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        bottom: 5%;
+        pointer-events: none;
+        opacity: 0;
+        transition: ease all 0.2s;
+
+        & button:first-child {
+            margin-right: 2px;
+        }
+
+        & button:first-child {
+            margin-left: 2px;
+        }
     }
 }
 
