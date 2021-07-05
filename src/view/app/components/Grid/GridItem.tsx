@@ -101,6 +101,7 @@ const GridItem = (props: GridItemProps): JSX.Element => {
                 className="svg_grid__label mt-5"
                 value={spriteName}
                 ref={inputRef}
+                onClick={(e) => e.stopPropagation()}
                 onChange={handleOnNameChange}
             />
             <div className="svg_grid__actions">
