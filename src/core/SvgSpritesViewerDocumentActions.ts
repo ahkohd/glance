@@ -17,6 +17,8 @@ import {
     nodeToSymbolText,
     openWebview,
     strToValidVariableName,
+    elementNodesToWriteBuffer,
+    readFile,
 } from './utils/fns'
 
 export default class SvgSpritesViewerDocumentActions {
@@ -98,16 +100,15 @@ export default class SvgSpritesViewerDocumentActions {
         textEditorId: string,
         context: ExtensionContext,
         panel: WebviewPanel,
-        readFromUri: boolean = false
+        readFromUri: boolean = true
     ) {
         try {
             const { getText, uri } =
                 SvgSpritesViewer.textEditors.get(textEditorId)!.document
             const { extensionPath } = context
 
-            const text = !readFromUri
-                ? getText()
-                : ((await workspace.fs.readFile(uri)) ?? '').toString()
+            const text = !readFromUri ? getText() : await readFile(uri)
+
             const svgTree = parse(text) ?? null
 
             panel.webview.html =
@@ -121,12 +122,135 @@ export default class SvgSpritesViewerDocumentActions {
         }
     }
 
-    static addNewSprites(
+    static async removeSprite(
+        spriteId: string,
+        textEditorId: string,
+        context: ExtensionContext,
+        panel: WebviewPanel
+    ) {
+        try {
+            const {
+                document: { uri },
+            } = SvgSpritesViewer.textEditors.get(textEditorId)!
+            const svgTree = parse(await readFile(uri)) ?? null
+
+            if (svgTree && isASpriteSVG(svgTree)) {
+                const sprites: Array<ElementNode> = (
+                    svgTree.children[0] as ElementNode
+                ).children as Array<ElementNode>
+
+                if (sprites) {
+                    const svgSymbolIndex = sprites.findIndex(
+                        (node: ElementNode) =>
+                            node.tagName === 'symbol' &&
+                            node.properties?.id === spriteId
+                    )
+
+                    if (svgSymbolIndex >= 0) {
+                        sprites.splice(svgSymbolIndex, 1)
+
+                        const writeData = elementNodesToWriteBuffer(sprites)
+
+                        workspace.fs.writeFile(uri, writeData).then(
+                            () => {
+                                SvgSpritesViewerDocumentActions.reloadWebview(
+                                    textEditorId,
+                                    context,
+                                    panel
+                                )
+
+                                window.showInformationMessage(
+                                    Text.spriteDeleted.replace(
+                                        '{}',
+                                        `#${spriteId}`
+                                    )
+                                )
+                            },
+                            () => {
+                                window.showErrorMessage(
+                                    Text.unableToUpdateSprite
+                                )
+                            }
+                        )
+                    } else {
+                        window.showErrorMessage(Text.spriteNotFound)
+                    }
+                }
+            } else {
+                window.showErrorMessage(Text.unableToParseSvgDocument)
+            }
+        } catch (e) {
+            window.showErrorMessage(e.message)
+        }
+    }
+
+    static async renameSprite(
+        spriteId: string,
+        newSpriteId: string,
+        textEditorId: string,
+        context: ExtensionContext,
+        panel: WebviewPanel
+    ) {
+        try {
+            const {
+                document: { uri },
+            } = SvgSpritesViewer.textEditors.get(textEditorId)!
+
+            const svgTree = parse(await readFile(uri)) ?? null
+
+            if (svgTree && isASpriteSVG(svgTree)) {
+                const sprites: Array<ElementNode> = (
+                    svgTree.children[0] as ElementNode
+                ).children as Array<ElementNode>
+
+                if (sprites) {
+                    const svgSymbolIndex = sprites.findIndex(
+                        (node: ElementNode) =>
+                            node.tagName === 'symbol' &&
+                            node.properties?.id === spriteId
+                    )
+
+                    if (svgSymbolIndex >= 0) {
+                        sprites[svgSymbolIndex].properties!.id = newSpriteId
+
+                        const writeData = elementNodesToWriteBuffer(sprites)
+
+                        workspace.fs.writeFile(uri, writeData).then(
+                            () => {
+                                SvgSpritesViewerDocumentActions.reloadWebview(
+                                    textEditorId,
+                                    context,
+                                    panel
+                                )
+
+                                window.showInformationMessage(
+                                    Text.spriteRenamed
+                                )
+                            },
+                            () => {
+                                window.showErrorMessage(
+                                    Text.unableToUpdateSprite
+                                )
+                            }
+                        )
+                    } else {
+                        window.showErrorMessage(Text.spriteNotFound)
+                    }
+                }
+            } else {
+                window.showErrorMessage(Text.unableToParseSvgDocument)
+            }
+        } catch (e) {
+            window.showErrorMessage(e.message)
+        }
+    }
+
+    static async addNewSprites(
         svgs: Array<{ svg: string; name: string }>,
         textEditorId: string,
         context: ExtensionContext,
         panel: WebviewPanel
-    ): void {
+    ) {
         const symbols: string[] = []
 
         // parse and extract symbols from svgs
@@ -159,10 +283,10 @@ export default class SvgSpritesViewerDocumentActions {
             const newSprites = symbols.join('')
 
             const {
-                document: { getText, uri },
+                document: { uri },
             } = SvgSpritesViewer.textEditors.get(textEditorId)!
 
-            const sprites = getText()
+            const sprites = await readFile(uri)
             const lastIndexOfClosingSvgTag = sprites.lastIndexOf('</svg>')
             const updatedSprites = xmlFormatter(
                 `${sprites.slice(
@@ -178,8 +302,7 @@ export default class SvgSpritesViewerDocumentActions {
                     SvgSpritesViewerDocumentActions.reloadWebview(
                         textEditorId,
                         context,
-                        panel,
-                        true
+                        panel
                     )
 
                     window.showInformationMessage(

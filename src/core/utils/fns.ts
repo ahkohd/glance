@@ -4,6 +4,7 @@ import { RootNode, ElementNode } from 'svg-parser'
 import { WEB_VIEW_NAME, WEB_VIEW_TITLE } from '../consts/consts'
 import { nodeToSvgText } from '../../view/app/utils/fns'
 import shortid = require('shortid')
+import xmlFormatter = require('xml-formatter')
 
 export const openWebview = (
     documentFileName: string,
@@ -56,6 +57,16 @@ export const nodeToSymbolText = (node: ElementNode, name?: string): string => {
     }
 }
 
+export const elementNodesToWriteBuffer = (sprites: Array<ElementNode>) =>
+    Buffer.from(
+        xmlFormatter(
+            `<svg>${sprites
+                .map((sprite) => nodeToSymbolText(sprite))
+                .join('\n')}</svg>`
+        ),
+        'utf8'
+    )
+
 export const strToValidVariableName = (str: string, replaceHyphen = false) => {
     let convertedStr = str.trim()
 
@@ -76,4 +87,15 @@ export const strToValidVariableName = (str: string, replaceHyphen = false) => {
     }
 
     return convertedStr
+}
+
+export const readFile = (uri: vscode.Uri): Promise<string> => {
+    return new Promise((resolve, reject) => {
+        vscode.workspace.fs.readFile(uri).then(
+            (data) => {
+                resolve(new TextDecoder().decode(data))
+            },
+            (e) => reject(e)
+        )
+    })
 }

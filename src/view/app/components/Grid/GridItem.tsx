@@ -5,6 +5,7 @@ import React, {
     useMemo,
     useRef,
     useState,
+    KeyboardEvent,
 } from 'react'
 import useStore from 'store/store'
 import { copyToClipboard } from 'utils/clipboard'
@@ -53,13 +54,30 @@ const GridItem = (props: GridItemProps): JSX.Element => {
         })
     }
 
-    const handleToggleEditMode = (event: MouseEvent<HTMLButtonElement>) => {
+    const handleRenameSprite = () => {
+        vscode.postMessage({
+            command: WebViewMessage.renameSprite,
+            spriteId: props.svg.id,
+            newSpriteId: spriteName,
+            textEditorId: (window as any).textEditorId,
+        })
+    }
+
+    const handleToggleEditMode = (
+        event: MouseEvent<HTMLButtonElement> | KeyboardEvent<HTMLInputElement>
+    ) => {
         event.stopPropagation()
 
         setEditMode((prev) => {
             const next = !prev
+            const inputElem = inputRef.current!
+
             if (next) {
-                inputRef.current!.focus()
+                inputElem.focus()
+            } else {
+                inputElem.blur()
+                inputElem.readOnly = true
+                if (spriteName !== props.svg.id) handleRenameSprite()
             }
 
             return next
@@ -72,6 +90,12 @@ const GridItem = (props: GridItemProps): JSX.Element => {
 
     const handleDeleteSprite = (event: MouseEvent<HTMLButtonElement>) => {
         event.stopPropagation()
+
+        vscode.postMessage({
+            command: WebViewMessage.deleteSprite,
+            spriteId: svg.id,
+            textEditorId: (window as any).textEditorId,
+        })
     }
 
     const Svg = useMemo(
@@ -103,6 +127,7 @@ const GridItem = (props: GridItemProps): JSX.Element => {
                 ref={inputRef}
                 onClick={(e) => e.stopPropagation()}
                 onChange={handleOnNameChange}
+                onKeyDown={(e) => e.key === 'Enter' && handleToggleEditMode(e)}
             />
             <div className="svg_grid__actions">
                 <button className="btn--icon" onClick={handleToggleEditMode}>

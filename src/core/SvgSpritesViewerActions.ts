@@ -20,6 +20,15 @@ export class SvgSpritesViewerActions {
                             panel
                         )
                         break
+                    case WebViewMessage.renameSprite:
+                        SvgSpritesViewerDocumentActions.renameSprite(
+                            message.spriteId,
+                            message.newSpriteId,
+                            message.textEditorId,
+                            context,
+                            panel
+                        )
+                        break
                     case WebViewMessage.addNewSprites:
                         SvgSpritesViewerDocumentActions.addNewSprites(
                             message.svgs,
@@ -27,6 +36,16 @@ export class SvgSpritesViewerActions {
                             context,
                             panel
                         )
+                        break
+                    case WebViewMessage.deleteSprite:
+                        SvgSpritesViewerActions.confirmFirstThenRun(() => {
+                            SvgSpritesViewerDocumentActions.removeSprite(
+                                message.spriteId,
+                                message.textEditorId,
+                                context,
+                                panel
+                            )
+                        })
                         break
                 }
             },
@@ -44,5 +63,18 @@ export class SvgSpritesViewerActions {
                 window.showErrorMessage(message.text)
                 break
         }
+    }
+
+    static confirmFirstThenRun(
+        callback: () => void,
+        message = 'Do you want to do this?'
+    ): void {
+        window
+            .showInformationMessage(message, ...['Yes', 'No'])
+            .then((answer) => {
+                if (answer === 'Yes') {
+                    callback()
+                }
+            })
     }
 }
