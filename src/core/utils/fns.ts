@@ -33,7 +33,7 @@ export const isASpriteSVG = (svgTree: RootNode) => {
     )
 }
 
-export const nodeToSymbolText = (node: ElementNode, name?: string): string => {
+export const nodeToSymbolTag = (node: ElementNode, name?: string): string => {
     const symbolId = name
         ? name
         : node?.properties?.id ?? strToValidVariableName(shortid.generate())
@@ -61,7 +61,7 @@ export const elementNodesToWriteBuffer = (sprites: Array<ElementNode>) =>
     Buffer.from(
         xmlFormatter(
             `<svg>${sprites
-                .map((sprite) => nodeToSymbolText(sprite))
+                .map((sprite) => nodeToSymbolTag(sprite))
                 .join('\n')}</svg>`
         ),
         'utf8'

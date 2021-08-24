@@ -14,7 +14,7 @@ import SvgSpritesViewer from './SvgSpritesViewer'
 import { SvgSpritesViewerActions } from './SvgSpritesViewerActions'
 import {
     isASpriteSVG,
-    nodeToSymbolText,
+    nodeToSymbolTag,
     openWebview,
     strToValidVariableName,
     elementNodesToWriteBuffer,
@@ -211,7 +211,8 @@ export default class SvgSpritesViewerDocumentActions {
                     )
 
                     if (svgSymbolIndex >= 0) {
-                        sprites[svgSymbolIndex].properties!.id = newSpriteId
+                        sprites[svgSymbolIndex].properties!.id =
+                            strToValidVariableName(newSpriteId)
 
                         const writeData = elementNodesToWriteBuffer(sprites)
 
@@ -265,12 +266,12 @@ export default class SvgSpritesViewerDocumentActions {
                 if (isASpriteSVG(svgTree)) {
                     ;(svgTree.children[0] as ElementNode).children.forEach(
                         (child) => {
-                            symbols.push(nodeToSymbolText(child as ElementNode))
+                            symbols.push(nodeToSymbolTag(child as ElementNode))
                         }
                     )
                 } else {
                     symbols.push(
-                        nodeToSymbolText(
+                        nodeToSymbolTag(
                             svgTree.children[0] as ElementNode,
                             strToValidVariableName(parsepath(name).name)
                         )
