@@ -3,7 +3,7 @@ import { join } from 'path'
 import { RootNode, ElementNode } from 'svg-parser'
 import { WEB_VIEW_NAME, WEB_VIEW_TITLE } from '../consts/consts'
 import { nodeToSvgText } from '../../view/app/utils/fns'
-import shortid = require('shortid')
+import { nanoid } from 'nanoid'
 import xmlFormatter = require('xml-formatter')
 
 export const openWebview = (
@@ -36,7 +36,7 @@ export const isASpriteSVG = (svgTree: RootNode) => {
 export const nodeToSymbolTag = (node: ElementNode, name?: string): string => {
     const symbolId = name
         ? name
-        : node?.properties?.id ?? strToValidVariableName(shortid.generate())
+        : node?.properties?.id ?? strToValidVariableName(nanoid())
 
     if (node.type === 'element') {
         return `<symbol id="${symbolId}" stroke="currentColor" ${Object.entries(

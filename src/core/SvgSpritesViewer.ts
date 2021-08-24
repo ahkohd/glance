@@ -1,7 +1,7 @@
 import { ExtensionContext, window, TextEditor } from 'vscode'
 import SvgSpritesViewerDocumentActions from './SvgSpritesViewerDocumentActions'
 import { Text } from './consts/consts'
-const shortid = require('shortid')
+import { nanoid } from 'nanoid'
 
 export default class SvgSpritesViewer {
     public static instance = new SvgSpritesViewer()
@@ -17,7 +17,7 @@ export default class SvgSpritesViewer {
         const activeTextEditor = window.activeTextEditor
 
         if (activeTextEditor?.document) {
-            const documentId = shortid.generate()
+            const documentId = nanoid()
 
             SvgSpritesViewerDocumentActions.glanceDocument(
                 documentId,
