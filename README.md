@@ -6,9 +6,10 @@ A `VSCode` extension for viewing [SVG sprites](https://css-tricks.com/svg-symbol
 ## ✨ Features
 
 -   [x] A viewer for SVG sprites
--   [x] Search icons
--   [x] Copy icon's Id or SVG to clipboard
+-   [x] Search sprites
+-   [x] A function to copy the icon's ID or SVG to clipboard
 -   [x] Appearance controls
+-   [x] Easily add, edit, and remove SVG sprites
 
 ![Banner](media/banner.png)
 
@@ -69,3 +70,9 @@ This extension contributes the following settings:
 
 -   Activate plugin when runs the Glance command
 -   Also activate plugin when user views XML documents
+
+### 0.0.7
+
+-   Implement add single svg or sprites
+-   Implement rename sprite asset
+-   Implement delete sprite asset
