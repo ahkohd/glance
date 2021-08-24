@@ -76,3 +76,7 @@ This extension contributes the following settings:
 -   Implement add single svg or sprites
 -   Implement rename sprite asset
 -   Implement delete sprite asset
+
+### 0.0.8
+
+-   Use nanoid instead of shortid
